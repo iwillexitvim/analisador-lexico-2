@@ -16,20 +16,19 @@ function setup() {
     area.position(column1, 130);
     area.size(300, 400);
     area.elt.placeholder = "Inserir código aqui";
+
+    tokensArea = createElement("h2");
+    tokensArea.position(column2, 130);
   
     lexBtn = createButton("Rodar Análise Léxica"); 
     lexBtn.position(column1, 700); 
-    lexBtn.mouseClicked(runLexicalAnalyzer);
-  
-    synBtn = createButton("Rodar Análise Sintática"); 
-    synBtn.position(column2, 700); 
-    synBtn.mouseClicked(runSyntacticAnalyzer); 
+    lexBtn.mouseClicked(() => {
+      const parser = new Parser(inputCode);
+      const tokens = parser.parse();
+    
+      tokensArea.elt.textContent = tokens.join("\n")
+    });
   }
-
-function runLexicalAnalyzer() {
-  const parser = new Parser(inputCode);
-  console.log()
-}
 
 function runSyntacticAnalyzer() {}
 
